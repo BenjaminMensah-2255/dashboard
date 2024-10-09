@@ -42,36 +42,35 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen flex">
+    <div className="min-h-screen flex flex-col lg:flex-row">
       {/* Left Section: Promotional content */}
-      <div className="bg-gradient-to-br from-customBlue to-indigo-800 text-white w-1/3 flex flex-col justify-center items-center p-10">
-  <div className="max-w-md text-center">
-    {/* Logo */}
-    <img src="/assets/logo.png" alt="Logo" className="h-16 w-16 mb-10 mx-auto" />
-    
-    {/* Heading */}
-    <h1 className="text-4xl font-extrabold mb-8 leading-tight">
-      Welcome back to XtraPay!
-    </h1>
-    
-    {/* Description */}
-    <p className="text-xl leading-relaxed mb-10 opacity-90">
-      Sign in to manage your payments and finances with ease and security.
-    </p>
-    
-    {/* Learn More Button */}
-    <button className="bg-white text-indigo-600 px-8 py-4 rounded-lg shadow-lg hover:bg-opacity-90 transition-all duration-300 text-lg font-semibold mx-auto">
-      Learn More
-    </button>
-  </div>
-</div>
-
+      <div className="bg-gradient-to-br from-customBlue to-customBlue text-white lg:w-1/3 flex flex-col justify-center items-center p-8 lg:p-10">
+        <div className="max-w-md text-center">
+          {/* Logo 
+          <img src="/assets/logo.png" alt="Logo" className="h-16 w-16 mb-6 lg:mb-10 mx-auto" />
+          */}
+          {/* Heading */}
+          <h1 className="text-3xl lg:text-4xl font-bold mb-6 lg:mb-8 leading-tight">
+            Welcome back to XtraPay!
+          </h1>
+          
+          {/* Description */}
+          <p className="text-lg lg:text-xl leading-relaxed mb-8 lg:mb-10 opacity-90">
+            Sign in to manage your payments and finances with ease and security.
+          </p>
+          
+          {/* Learn More Button */}
+          <button className="bg-blue-600 text-white px-6 lg:px-8 py-3 lg:py-4 rounded-lg shadow-lg hover:bg-opacity-90 transition-all duration-300 text-base lg:text-lg font-semibold mx-auto">
+            Learn More
+          </button>
+        </div>
+      </div>
 
       {/* Right Section: Login Form */}
-      <div className="bg-white w-2/3 flex items-center justify-center p-16">
+      <div className="bg-white lg:w-2/3 flex items-center justify-center p-8 lg:p-16">
         <div className="w-full max-w-md">
-          <h2 className="text-4xl font-bold mb-2">Sign in to XtraPay</h2>
-          <p className="text-gray-600 mb-8">Enter your details to access your account</p>
+          <h2 className="text-3xl lg:text-4xl font-bold mb-2">Sign in to XtraPay</h2>
+          <p className="text-gray-600 mb-6 lg:mb-8">Enter your details to access your account</p>
 
           <form onSubmit={handleLogin} className="space-y-6">
             {/* Email Input */}
@@ -120,7 +119,7 @@ export default function LoginPage() {
             </div>
 
             {/* Remember Me and Forgot Password */}
-            <div className="flex items-center justify-between">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-2 sm:space-y-0">
               <div className="flex items-center">
                 <input
                   type="checkbox"
@@ -130,7 +129,7 @@ export default function LoginPage() {
                 />
                 <span className="ml-2 text-sm text-gray-600">Remember me</span>
               </div>
-              <Link href="/auth/forgotpassword" className="text-sm text-indigo-600 hover:text-indigo-500 font-medium">
+              <Link href="/forgotpassword" className="text-sm text-customBlue font-medium">
                 Forgot password?
               </Link>
             </div>
@@ -138,7 +137,7 @@ export default function LoginPage() {
             {/* Login Button */}
             <button
               type="submit"
-              className="w-full bg-indigo-600 text-white py-3 rounded-lg hover:bg-indigo-700 transition-all duration-300 font-semibold text-lg shadow-md hover:shadow-lg"
+              className="w-full bg-customBlue text-white py-3 rounded-lg hover:bg-faint transition-all duration-300 font-semibold text-lg shadow-md hover:shadow-lg"
             >
               Sign in
             </button>
@@ -147,7 +146,7 @@ export default function LoginPage() {
             <div className="text-center">
               <p className="text-gray-600">
                 Don't have an account?{' '}
-                <Link href="/auth/register" className="text-indigo-600 hover:text-indigo-500 font-bold">
+                <Link href="/register" className="text-customBlue font-bold">
                   Create an account
                 </Link>
               </p>

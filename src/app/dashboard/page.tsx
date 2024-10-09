@@ -1,128 +1,199 @@
-import React from 'react';
-import { FiDollarSign, FiArrowDown, FiArrowUp, FiEye, FiBell, FiUser, FiSearch } from 'react-icons/fi';
-import Sidebar from '@/components/Sidebar';
-interface Transaction {
-  id: string;
-  name: string;
-  date: string;
-  amount: number;
-  type: 'credit' | 'debit';
-}
+'use client';
 
-const Dashboard: React.FC = () => {
-  const transactions: Transaction[] = [
-    { id: '1', name: 'CodeXtra', date: '29 Dec 2021', amount: 320.67, type: 'credit' },
-    { id: '2', name: 'Plugnom', date: '29 Dec 2021', amount: 28.00, type: 'credit' },
-    { id: '3', name: 'Copaddler', date: '29 Dec 2021', amount: 28.00, type: 'credit' },
-    { id: '4', name: 'QwikFit', date: '29 Dec 2021', amount: 28.00, type: 'credit' },
+import { useState, useEffect, useRef } from 'react';
+import Sidebar from '@/components/Sidebar';
+import TopBar from '@/components/TopBar';
+import { ArrowDownRight, ArrowUpRight, Eye, EyeOff } from 'lucide-react';
+
+export default function Dashboard() {
+  const [selectedYear, setSelectedYear] = useState('2024');
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
+  const [isBalanceVisible, setIsBalanceVisible] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement | null>(null);
+
+  const years = ['2024', '2023', '2022', '2021', '2020'];
+
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setIsDropdownOpen(false);
+      }
+    }
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
+  const recentActivities = [
+    { name: 'CodeXtra', date: '29 Dec 2021', amount: 320.67, type: 'received' },
+    { name: 'Plugnom', date: '29 Dec 2021', amount: 28.00, type: 'received' },
+    { name: 'Copaddler', date: '29 Dec 2021', amount: 28.00, type: 'received' },
+    { name: 'QwikFit', date: '29 Dec 2021', amount: 28.00, type: 'received' },
   ];
 
-  return (
-    <div className="flex h-screen bg-gray-100">
-      <Sidebar />
-      <div className="flex-1 overflow-auto">
-        <div className="p-8">
-          <header className="flex justify-between items-center mb-8">
-            <div>
-              <h1 className="text-3xl font-bold text-gray-800">Good morning, Ebenezer 👋</h1>
-              <p className="text-gray-600">Here's a summary of your business operations</p>
-            </div>
-            <div className="flex items-center space-x-4">
-              <div className="relative">
-                <input
-                  type="text"
-                  placeholder="Search..."
-                  className="pl-10 pr-4 py-2 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                />
-                <FiSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
-              </div>
-              <button className="p-2 rounded-full bg-gray-200 text-gray-600 hover:bg-gray-300">
-                <FiBell />
-              </button>
-              <button className="p-2 rounded-full bg-gray-200 text-gray-600 hover:bg-gray-300">
-                <FiUser />
-              </button>
-            </div>
-          </header>
+  const cards = [
+    {
+      title: 'Wallet',
+      subtitle: 'Account Balance in GHS',
+      amount: isBalanceVisible ? 'GHS 1,234.56' : 'GHS***',
+      icon: '/assets/wallet.png',
+      iconBg: 'bg-blue-50',
+      showEye: true,
+      showFlag: true,
+    },
+    {
+      title: 'Received',
+      subtitle: '0%',
+      amount: 'GHS0.00',
+      icon: <ArrowDownRight className="w-6 h-6 text-emerald-500" />,
+      iconBg: 'bg-emerald-50',
+    },
+    {
+      title: 'Payouts',
+      subtitle: '0%',
+      amount: 'GHS0.00',
+      icon: <ArrowUpRight className="w-6 h-6 text-rose-500" />,
+      iconBg: 'bg-rose-50',
+    },
+  ];
 
-          <div className="grid grid-cols-3 gap-6 mb-8">
-            <div className="bg-white rounded-xl shadow-md p-6">
-              <div className="flex items-center justify-between mb-4">
-                <div className="p-3 bg-blue-100 rounded-full">
-                  <FiDollarSign className="text-blue-500 text-xl" />
-                </div>
-                <span className="text-sm font-medium text-gray-500">Account Balance in GHS</span>
-              </div>
-              <h2 className="text-2xl font-bold text-gray-800">GHS*****</h2>
-              <p className="text-sm text-gray-500 mt-2">Wallet</p>
+  const toggleBalanceVisibility = () => {
+    setIsBalanceVisible(!isBalanceVisible);
+  };
+
+  return (
+    <div className="flex h-screen bg-gray-50 text-gray-800">
+      <Sidebar />
+
+      <div className="flex-1 p-8 overflow-y-auto">
+        {/* Top Bar */}
+        <TopBar 
+          isProfileDropdownOpen={isProfileDropdownOpen} 
+          setIsProfileDropdownOpen={setIsProfileDropdownOpen}
+        />
+
+        {/* Alert Banner */}
+        <div className="bg-[#0098db]/10 text-[#0098db] p-4 rounded-lg mb-8 flex justify-between items-center font-serif">
+          <div className="flex items-center">
+            <div className="w-8 h-8 bg-[#0098db]/20 rounded-lg flex items-center justify-center mr-3">
+              <img src="/assets/money.png" alt="KYC" className="w-5 h-5" />
             </div>
-            <div className="bg-white rounded-xl shadow-md p-6">
-              <div className="flex items-center justify-between mb-4">
-                <div className="p-3 bg-green-100 rounded-full">
-                  <FiArrowDown className="text-green-500 text-xl" />
+            <span>Transactions on this account require completed KYC -</span>
+            <a href="#" className="text-[#0098db] font-semibold ml-2">Complete KYC Now.</a>
+          </div>
+        </div>
+
+        {/* Cards Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+          {cards.map((card, index) => (
+            <div key={index} className="bg-white rounded-2xl p-6 shadow-md border border-gray-100 hover:shadow-md transition-shadow">
+              <div className="flex justify-between items-center mb-6">
+                <div className={`w-12 h-12 ${card.iconBg} rounded-xl flex items-center justify-center`}>
+                  {typeof card.icon === 'string' ? (
+                    <img src={card.icon} alt={card.title} className="w-6 h-6" />
+                  ) : (
+                    card.icon
+                  )}
                 </div>
-                <span className="text-sm font-medium text-gray-500">0%</span>
+                {card.showEye && (
+                  <button 
+                    className="p-2 bg-gray-50 hover:bg-gray-100 rounded-full transition-colors"
+                    onClick={toggleBalanceVisibility}
+                  >
+                    {isBalanceVisible ? (
+                      <EyeOff className="w-5 h-5 text-gray-600" />
+                    ) : (
+                      <Eye className="w-5 h-5 text-gray-600" />
+                    )}
+                  </button>
+                )}
               </div>
-              <h2 className="text-2xl font-bold text-gray-800">GHS0.00</h2>
-              <p className="text-sm text-gray-500 mt-2">Received</p>
+              <div className="space-y-1">
+                <h2 className="text-lg font-semibold text-gray-700 font-serif">{card.title}</h2>
+                <p className="text-sm text-gray-500">{card.subtitle}</p>
+                <div className="flex items-center pt-2">
+                  <span className="text-2xl font-bold text-gray-900">{card.amount}</span>
+                  {card.showFlag && (
+                    <img src="/assets/flag.png" alt="GH flag" className="w-6 h-6 ml-2" />
+                  )}
+                </div>
+              </div>
             </div>
-            <div className="bg-white rounded-xl shadow-md p-6">
-              <div className="flex items-center justify-between mb-4">
-                <div className="p-3 bg-red-100 rounded-full">
-                  <FiArrowUp className="text-red-500 text-xl" />
+          ))}
+        </div>
+
+        {/* Action Buttons */}
+        <div className="flex gap-4 mb-8 font-serif">
+          <button className="flex-1 bg-[#0098db] text-white py-3 rounded-lg hover:bg-[#0087c4] transition-colors font-semibold shadow-sm">
+            Receive Money
+          </button>
+          <button className="flex-1 bg-[#0098db] text-white py-3 rounded-lg hover:bg-[#0087c4] transition-colors font-semibold shadow-sm">
+            Send Money
+          </button>
+          <button className="flex-1 bg-gray-200 text-gray-700 py-3 rounded-lg hover:bg-gray-300 transition-colors font-semibold">
+            Bulk Payment
+          </button>
+        </div>
+
+        {/* Recent Activities section */}
+        <div>
+          <div className="flex justify-between items-center mb-4 font-serif">
+            <h2 className="text-xl font-semibold text-gray-900">Recent Activities</h2>
+            <div className="relative" ref={dropdownRef}>
+              <button 
+                onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                className="flex items-center px-3 py-2 bg-white rounded-lg border border-gray-200 hover:bg-gray-50 transition-colors"
+              >
+                <span className="text-gray-600 mr-2">{selectedYear}</span>
+                <ArrowDownRight className="w-5 h-5 text-gray-600" />
+              </button>
+              
+              {isDropdownOpen && (
+                <div className="absolute right-0 mt-2 w-32 bg-white border border-gray-200 rounded-lg shadow-lg z-10">
+                  {years.map((year) => (
+                    <button
+                      key={year}
+                      onClick={() => {
+                        setSelectedYear(year);
+                        setIsDropdownOpen(false);
+                      }}
+                      className="block w-full text-left px-4 py-2 hover:bg-gray-50 transition-colors"
+                    >
+                      {year}
+                    </button>
+                  ))}
                 </div>
-                <span className="text-sm font-medium text-gray-500">0%</span>
-              </div>
-              <h2 className="text-2xl font-bold text-gray-800">GHS0.00</h2>
-              <p className="text-sm text-gray-500 mt-2">Payouts</p>
+              )}
             </div>
           </div>
-
-          <div className="grid grid-cols-3 gap-6">
-            <div className="col-span-2 bg-white rounded-xl shadow-md p-6">
-              <h3 className="text-xl font-semibold text-gray-800 mb-4">Recent Activities</h3>
-              <div className="space-y-4">
-                {transactions.map((transaction) => (
-                  <div key={transaction.id} className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
-                    <div className="flex items-center space-x-4">
-                      <div className={`p-2 rounded-full ${transaction.type === 'credit' ? 'bg-green-100' : 'bg-red-100'}`}>
-                        {transaction.type === 'credit' ? (
-                          <FiArrowDown className="text-green-500" />
-                        ) : (
-                          <FiArrowUp className="text-red-500" />
-                        )}
+          
+          <div className="bg-white border border-gray-200 rounded-lg shadow-sm font-serif">
+            <table className="w-full">
+              <tbody>
+                {recentActivities.map((activity, index) => (
+                  <tr key={index} className={index > 0 ? "border-t border-gray-200" : ""}>
+                    <td className="p-4">
+                      <div className="flex items-center">
+                        <div className="w-10 h-10 bg-gray-100 rounded-lg flex items-center justify-center mr-3">
+                          <img src="/assets/office-building.png" alt={activity.name} className="w-6 h-6" />
+                        </div>
+                        <div>
+                          <div className="font-semibold text-gray-900">{activity.name}</div>
+                          <div className="text-gray-600 text-sm">{activity.date}</div>
+                        </div>
                       </div>
-                      <div>
-                        <p className="font-medium text-gray-800">{transaction.name}</p>
-                        <p className="text-sm text-gray-500">{transaction.date}</p>
-                      </div>
-                    </div>
-                    <p className={`font-semibold ${transaction.type === 'credit' ? 'text-green-500' : 'text-red-500'}`}>
-                      GHS{transaction.amount.toFixed(2)}
-                    </p>
-                  </div>
+                    </td>
+                    <td className="p-4 text-right">
+                      <div className="font-semibold text-gray-900">GHS{activity.amount.toFixed(2)}</div>
+                    </td>
+                  </tr>
                 ))}
-              </div>
-            </div>
-            <div className="bg-white rounded-xl shadow-md p-6">
-              <h3 className="text-xl font-semibold text-gray-800 mb-4">Quick Actions</h3>
-              <div className="space-y-4">
-                <button className="w-full bg-blue-500 text-white font-medium py-2 px-4 rounded-lg hover:bg-blue-600 transition-colors">
-                  Receive Money
-                </button>
-                <button className="w-full bg-white text-blue-500 font-medium py-2 px-4 rounded-lg border border-blue-500 hover:bg-blue-50 transition-colors">
-                  Send Money
-                </button>
-                <button className="w-full bg-white text-blue-500 font-medium py-2 px-4 rounded-lg border border-blue-500 hover:bg-blue-50 transition-colors">
-                  Bulk Payment
-                </button>
-              </div>
-            </div>
+              </tbody>
+            </table>
           </div>
         </div>
       </div>
     </div>
   );
-};
-
-export default Dashboard;
+}
