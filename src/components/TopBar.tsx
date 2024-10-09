@@ -1,6 +1,6 @@
 'use client';
 
-import { Bell, Search, ChevronDown, User, Settings, CreditCard, HelpCircle, LogOut, Menu } from 'lucide-react';
+import { Bell, Search, ChevronDown, User, Settings, CreditCard, HelpCircle, LogOut} from 'lucide-react';
 import { useRef, useEffect, useState } from 'react';
 
 interface TopBarProps {
@@ -10,7 +10,6 @@ interface TopBarProps {
 
 const TopBar: React.FC<TopBarProps> = ({ isProfileDropdownOpen, setIsProfileDropdownOpen }) => {
   const dropdownRef = useRef<HTMLDivElement | null>(null);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {

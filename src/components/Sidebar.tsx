@@ -4,7 +4,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useState } from 'react';
 import {
-  FaSearch, FaBell, FaUserCircle, FaExchangeAlt, FaUsers, FaCog, FaTools,
+   FaExchangeAlt, FaUsers, FaCog, FaTools,
   FaBars, FaTimes, FaChevronLeft, FaChevronRight, FaHome, FaWallet,
   FaMobileAlt, FaMoneyBillWave
 } from 'react-icons/fa';
