@@ -4,7 +4,6 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { Eye, EyeOff, Mail, Lock, User } from 'lucide-react';
-import Image from 'next/image';
 
 const RegisterPage = () => {
   const [name, setName] = useState('');
@@ -52,16 +51,7 @@ const RegisterPage = () => {
       {/* Left Section: Promotional content */}
       <div className="bg-gradient-to-br from-customBlue to-customBlue text-white w-full md:w-1/3 flex flex-col justify-center items-center p-6 md:p-10">
         <div className="max-w-md text-center">
-          {/* Logo 
-          <Image 
-            src="/assets/logo.png" 
-            alt="Logo" 
-            width={64}
-            height={64}
-            className="mb-6 md:mb-10 mx-auto" 
-          />
-          */}
-          {/* Heading */}
+          
           <h1 className="text-3xl md:text-4xl font-bold mb-4 md:mb-8 leading-tight">
             Join XtraPay Today!
           </h1>
