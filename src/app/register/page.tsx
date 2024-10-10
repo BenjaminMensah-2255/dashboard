@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { Eye, EyeOff, Mail, Lock, User } from 'lucide-react';
+import Image from 'next/image';
 
 const RegisterPage = () => {
   const [name, setName] = useState('');
@@ -52,7 +53,13 @@ const RegisterPage = () => {
       <div className="bg-gradient-to-br from-customBlue to-customBlue text-white w-full md:w-1/3 flex flex-col justify-center items-center p-6 md:p-10">
         <div className="max-w-md text-center">
           {/* Logo 
-          <img src="/assets/logo.png" alt="Logo" className="h-12 w-12 md:h-16 md:w-16 mb-6 md:mb-10 mx-auto" />
+          <Image 
+            src="/assets/logo.png" 
+            alt="Logo" 
+            width={64}
+            height={64}
+            className="mb-6 md:mb-10 mx-auto" 
+          />
           */}
           {/* Heading */}
           <h1 className="text-3xl md:text-4xl font-bold mb-4 md:mb-8 leading-tight">
@@ -144,7 +151,7 @@ const RegisterPage = () => {
 
             {/* Terms and Conditions */}
             <div className="text-sm text-gray-600">
-              By creating an account, you agree to XtraPay's{' '}
+              By creating an account, you agree to XtraPay&apos;s{' '}
               <Link href="/terms" className="text-customBlue hover:text-indigo-500 font-medium">
                 Terms of Service
               </Link>{' '}

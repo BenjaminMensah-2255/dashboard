@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
+import Image from 'next/image';
 import Sidebar from '@/components/Sidebar';
 import TopBar from '@/components/TopBar';
 import { ArrowDownRight, ArrowUpRight, Eye, EyeOff } from 'lucide-react';
@@ -67,7 +68,6 @@ export default function Dashboard() {
       <Sidebar />
 
       <div className="flex-1 p-8 overflow-y-auto">
-        {/* Top Bar */}
         <TopBar 
           isProfileDropdownOpen={isProfileDropdownOpen} 
           setIsProfileDropdownOpen={setIsProfileDropdownOpen}
@@ -77,7 +77,7 @@ export default function Dashboard() {
         <div className="bg-[#0098db]/10 text-[#0098db] p-4 rounded-lg mb-8 flex justify-between items-center font-serif">
           <div className="flex items-center">
             <div className="w-8 h-8 bg-[#0098db]/20 rounded-lg flex items-center justify-center mr-3">
-              <img src="/assets/money.png" alt="KYC" className="w-5 h-5" />
+              <Image src="/assets/money.png" alt="KYC" width={20} height={20} />
             </div>
             <span>Transactions on this account require completed KYC -</span>
             <a href="#" className="text-[#0098db] font-semibold ml-2">Complete KYC Now.</a>
@@ -91,7 +91,7 @@ export default function Dashboard() {
               <div className="flex justify-between items-center mb-6">
                 <div className={`w-12 h-12 ${card.iconBg} rounded-xl flex items-center justify-center`}>
                   {typeof card.icon === 'string' ? (
-                    <img src={card.icon} alt={card.title} className="w-6 h-6" />
+                    <Image src={card.icon} alt={card.title} width={24} height={24} />
                   ) : (
                     card.icon
                   )}
@@ -115,7 +115,7 @@ export default function Dashboard() {
                 <div className="flex items-center pt-2">
                   <span className="text-2xl font-bold text-gray-900">{card.amount}</span>
                   {card.showFlag && (
-                    <img src="/assets/flag.png" alt="GH flag" className="w-6 h-6 ml-2" />
+                    <Image src="/assets/flag.png" alt="GH flag" width={24} height={24} className="ml-2" />
                   )}
                 </div>
               </div>
@@ -176,7 +176,7 @@ export default function Dashboard() {
                     <td className="p-4">
                       <div className="flex items-center">
                         <div className="w-10 h-10 bg-gray-100 rounded-lg flex items-center justify-center mr-3">
-                          <img src="/assets/office-building.png" alt={activity.name} className="w-6 h-6" />
+                          <Image src="/assets/office-building.png" alt={activity.name} width={24} height={24} />
                         </div>
                         <div>
                           <div className="font-semibold text-gray-900">{activity.name}</div>

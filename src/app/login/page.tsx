@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { Eye, EyeOff, Mail, Lock } from 'lucide-react';
+import Image from 'next/image';
 
 export default function LoginPage() {
   const [email, setEmail] = useState('');
@@ -47,7 +48,11 @@ export default function LoginPage() {
       <div className="bg-gradient-to-br from-customBlue to-customBlue text-white lg:w-1/3 flex flex-col justify-center items-center p-8 lg:p-10">
         <div className="max-w-md text-center">
           {/* Logo 
-          <img src="/assets/logo.png" alt="Logo" className="h-16 w-16 mb-6 lg:mb-10 mx-auto" />
+          <div className="mb-8">
+            <div className="bg-white p-2 rounded inline-block">
+              <Image src="/assets/logo2.png" alt="XtraPay Logo" width={120} height={40} />
+            </div>
+          </div>
           */}
           {/* Heading */}
           <h1 className="text-3xl lg:text-4xl font-bold mb-6 lg:mb-8 leading-tight">
@@ -60,7 +65,7 @@ export default function LoginPage() {
           </p>
           
           {/* Learn More Button */}
-          <button className="bg-blue-600 text-white px-6 lg:px-8 py-3 lg:py-4 rounded-lg shadow-lg hover:bg-opacity-90 transition-all duration-300 text-base lg:text-lg font-semibold mx-auto">
+          <button className="bg-blue-600 text-white px-6 lg:px-8 py-3 lg:py-4 rounded-lg shadow-lg hover:bg-opacity-90 transition-all duration-300 text-base lg:text-lg font-semibold">
             Learn More
           </button>
         </div>
@@ -145,7 +150,7 @@ export default function LoginPage() {
             {/* Register Link */}
             <div className="text-center">
               <p className="text-gray-600">
-                Don't have an account?{' '}
+                Don&apos;t have an account?{' '}
                 <Link href="/register" className="text-customBlue font-bold">
                   Create an account
                 </Link>

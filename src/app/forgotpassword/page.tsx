@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
+import Image from 'next/image';
 
 const ForgotPasswordPage = () => {
   const [email, setEmail] = useState('');
@@ -49,10 +50,8 @@ const ForgotPasswordPage = () => {
     <div className="min-h-screen flex flex-col md:flex-row">
       {/* Left Section: Promotional content */}
       <div className="bg-gradient-to-br from-customBlue to-customBlue text-white w-full md:w-1/3 flex flex-col justify-center items-center p-6 md:p-10">
-       
-
         <h1 className="text-2xl md:text-4xl font-bold mb-3 md:mb-4 text-center">Win clients and scale sites fast with XtraPay</h1>
-        <p className="mb-4 md:mb-6 text-lg md:text-xl">Get started - it's free</p>
+        <p className="mb-4 md:mb-6 text-lg md:text-xl"> </p>
         <button className="bg-blue-600 text-white px-4 py-2 md:px-6 md:py-3 rounded-lg shadow-lg hover:bg-blue-700 text-lg md:text-base font-bold">
           Get Started
         </button>
@@ -64,7 +63,7 @@ const ForgotPasswordPage = () => {
           <h2 className="text-3xl md:text-4xl font-semibold mb-4 md:mb-6">Forgot Password?</h2>
 
           <p className="text-gray-600 text-base md:text-lg mb-4 md:mb-6 font-serif">
-            Enter the email address you used when you joined and we'll send you instructions to reset your password.
+            Enter the email address you used when you joined and we&apos;ll send you instructions to reset your password.
           </p>
           
           <p className="text-gray-500 text-sm md:text-base mb-4 md:mb-6 font-serif">

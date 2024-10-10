@@ -1,7 +1,8 @@
 'use client';
 
 import { Bell, Search, ChevronDown, User, Settings, CreditCard, HelpCircle, LogOut} from 'lucide-react';
-import { useRef, useEffect, useState } from 'react';
+import { useRef, useEffect} from 'react';
+import Image from 'next/image';
 
 interface TopBarProps {
   isProfileDropdownOpen: boolean;
@@ -33,7 +34,7 @@ const TopBar: React.FC<TopBarProps> = ({ isProfileDropdownOpen, setIsProfileDrop
     <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center mb-8 space-y-4 lg:space-y-0">
       <div>
         <h1 className="text-2xl lg:text-3xl font-bold mb-2 text-gray-900 font-serif">Good morning, Ebenezer 👋</h1>
-        <p className="text-gray-600 font-serif">Here's a summary of your business operations</p>
+        <p className="text-gray-600 font-serif">Here&apos;s a summary of your business operations</p>
       </div>
       <div className="flex flex-col lg:flex-row items-start lg:items-center space-y-4 lg:space-y-0 lg:space-x-4 w-full lg:w-auto">
         <div className="relative w-full lg:w-64">
@@ -54,7 +55,13 @@ const TopBar: React.FC<TopBarProps> = ({ isProfileDropdownOpen, setIsProfileDrop
               className="flex items-center bg-white border border-gray-200 rounded-lg p-2 hover:bg-gray-50 w-full lg:w-auto justify-between lg:justify-start transition-colors duration-200"
             >
               <div className="flex items-center">
-                <img src="/assets/profile.png" alt="Profile" className="w-8 h-8 rounded-full" />
+                <Image 
+                  src="/assets/profile.png" 
+                  alt="Profile" 
+                  width={32} 
+                  height={32} 
+                  className="rounded-full"
+                />
                 <span className="ml-2 mr-2 text-sm font-medium text-gray-700 lg:hidden">Ebenezer Kwesi</span>
               </div>
               <ChevronDown className="w-5 h-5 text-gray-600" />
